@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """Gerador do site New England Snow Removal (HTML estático).
-Uso:  python build.py      -> escreve as páginas em ../site
+Uso:  python build.py      -> escreve as páginas na raiz do repositório (../)
 Para trocar textos, contatos ou imagens, edite este arquivo e rode de novo."""
 import os, json, html, datetime
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.normpath(os.path.join(HERE, "..", "site"))
+OUT = os.path.normpath(os.path.join(HERE, ".."))
 IMGDIR = os.path.join(OUT, "assets", "img")
 
 SITE = "https://snowremoval-ne.com"
