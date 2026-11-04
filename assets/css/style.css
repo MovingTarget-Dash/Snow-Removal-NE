@@ -40,6 +40,9 @@ a{color:inherit}
 .topbar{background:var(--black);color:var(--gold-l);font-size:12px;border-bottom:1px solid #2a2217}
 .topbar .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:8px;padding-bottom:8px}
 .topbar a{text-decoration:none}
+.topbar .tel-btn{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border:1px solid var(--gold-l);border-radius:999px;font-weight:600;line-height:1;transition:background .2s,color .2s}
+.topbar .tel-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.topbar .tel-btn:hover,.topbar .tel-btn:focus-visible{background:var(--gold-l);color:var(--black)}
 .site-header{background:var(--black);position:sticky;top:0;z-index:100;box-shadow:0 2px 14px rgba(0,0,0,.35)}
 .hdr{display:flex;align-items:center;gap:20px;padding-top:12px;padding-bottom:12px}
 .hdr .brand{display:flex;align-items:center;gap:16px;text-decoration:none}
@@ -211,7 +214,7 @@ details.faq p{padding:2px 4px 20px 34px;color:#555;margin:0}
 }
 @media (max-width:800px){
   :root{--pad:20px}
-  .topbar .wrap{justify-content:flex-start}.topbar .wrap span+a,.topbar .wrap a{display:none}
+  .topbar .wrap{align-items:center}.topbar .tel-btn{padding:5px 10px;font-size:11px}
   .topbar{font-size:10.5px}
   .hdr{gap:10px}.hdr .brand{gap:10px}.hdr .brand img{height:34px}
   .seal{width:60px;height:60px;padding:1.2px}.seal svg{width:10px;height:10px;margin-bottom:2px}.seal .t1{font-size:12.5px}.seal .t2{font-size:6.8px;letter-spacing:.03em;margin-top:2px}

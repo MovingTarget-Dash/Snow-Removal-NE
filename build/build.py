@@ -152,7 +152,7 @@ def header(active, path):
         else:
             items.append(f'<li><a href="{href}"{cur}>{label}</a></li>')
     return (f'<a class="skip" href="#main">Skip to content</a>'
-            f'<div class="topbar"><div class="wrap"><span>Commercial &amp; residential snow removal · North Andover, MA</span><a href="tel:{TEL}">WhatsApp {PHONE}</a></div></div>'
+            f'<div class="topbar"><div class="wrap"><span>Commercial &amp; residential snow removal · Essex County, MA</span><a class="tel-btn" href="tel:{TEL}" aria-label="Call {PHONE}">{svg("phone")}{PHONE}</a></div></div>'
             f'<header class="site-header"><div class="wrap hdr"><a class="brand" href="/" aria-label="{NAME} - home"><img src="/assets/img/logo-horizontal.webp" alt="New England Carpenters" width="420" height="136">{SEAL}</a>'
             f'<nav class="nav" id="site-nav" aria-label="Main"><ul>{"".join(items)}</ul></nav>'
             f'<a class="btn p sm" href="/contact/">Get a Free Quote</a>'
