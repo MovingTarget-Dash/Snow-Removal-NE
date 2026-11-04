@@ -211,7 +211,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css?v=2">
+<link rel="stylesheet" href="/assets/css/style.css?v=6">
 {ldh}
 </head>
 <body>
@@ -221,7 +221,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 </main>
 {footer()}
 {max_btn(path)}
-<script src="/assets/js/main.js?v=2" defer></script>
+<script src="/assets/js/main.js?v=6" defer></script>
 </body>
 </html>
 '''
@@ -260,11 +260,23 @@ home += sec("<h2>How it works</h2>" + steps([("You send the details", "The addre
             ("You approve the price", "Per visit or for the whole season, settled before the first storm.")]) + btns([("Start with a free quote", "/contact/")]))
 home += sec(mapbox("Serving Essex County and nearby towns", "Our crews work in these communities. Not sure we reach you? Send us the address and we'll tell you.",
             pills(CITIES) + btns([("Check my address", "/contact/")])), "cream")
-REVIEWS = [("Zhe Jenny Zhang", "“Tiago and his excellent crew did a fabulous job on our 30-yr old deck rebuild! Very timely arrival every single day and cleaned off work site before leaving every single day! Very well done and extra workmanship quality! Will hire them again in a heartbeat!”"),
-           ("Robert Dwork", "“Excellent communication and willingness to work with the customer to get the desired results. Very professional and quality work.”"),
-           ("Andre Alvaranga", "“Did a great job and great people with good prices”")]
-rv = "".join(f'<figure class="rv"><div class="who"><div class="av">{e(n[0])}</div><div><b>{e(n)}</b><div style="font-size:12px;color:#888">Google review<span class="ex">example</span></div></div></div><div class="st" aria-label="5 stars">★★★★★</div><p>{e(t)}</p></figure>' for n, t in REVIEWS)
-home += sec(f'{eb("Testimonials")}<h2>Customer testimonials</h2><div class="grid c3">{rv}</div>' + btns([("Be a satisfied customer!", "/contact/")]), center=True)
+REVIEWS = [("Andre Alvaranga", "#7b1fa2", "Did a great job and great people with good prices"),
+           ("Jim Tucker", "#e8710a", "Quick to respond, communicated when weather caused a delay, work was done and looks great - would hire again"),
+           ("Rebecca Brown", "#0b57a4", "Snow removal is excellent and efficient. The crew is nice and respectful of property and family. Prices are reasonable as it depends on the snow amounts which I find convenient and competitive. I went with them over two other quotes as it was the best price!"),
+           ("Maria Fernandez", "#e8710a", "They have done an excellent job removing the snow in my driveway, very responsive and polite!! Overall great people to work with 😊 I highly recommend them."),
+           ("Michele Caruso", "#5f6368", "I had a fantastic experience with New England Carpenters handling my snow plowing this winter. They were incredibly reliable and showed up promptly after every storm, which I really appreciated. My driveway was always cleared thoroughly and safely, and I never had to worry about getting in or out during bad weather.</p><p>Their professionalism, consistency, and attention to detail really stood out. It’s clear they take pride in the work they do. Finding a dependable snow plowing service can be difficult, but they made the entire season stress-free.</p><p>I’m extremely happy with their service and would highly recommend New England Carpenters to anyone looking for reliable snow removal. I will absolutely be using them again next winter. So nice to have a company you can count on when the snow starts falling."),
+           ("Peter White", "#c5380f", "I used New England Carpenters for snow plowing this year, and they have been fantastic. They consistently arrive at reasonable times after snowfall and provide outstanding service. In addition to plowing, they also shovel the edges, doorstep, and other areas that are difficult for the plow to reach. They are reliable, thorough, and consistently deliver high-quality work."),
+           ("Sunshine Matthews", "#8e4a2f", "They are great! Work hard during storms and always show up. I would definitely recommend A+")]
+def rv_card(n, c, t):
+    flat = e(t.replace("</p><p>", " "))
+    full = t if "</p><p>" in t else e(t)
+    return (f'<div class="rv-slide"><figure class="rv"><img class="g" src="/assets/img/google-g.jpg" alt="Google" width="51" height="48" loading="lazy">'
+            f'<div class="who"><div class="av" style="background:{c}">{e(n[0])}</div><div><b>{e(n)}</b><div class="src">Google review</div></div></div>'
+            f'<div class="st" aria-label="5 stars">\u2605\u2605\u2605\u2605\u2605</div><p class="clamp">{flat}</p>'
+            f'<button type="button" class="more" hidden>More</button><div class="full" hidden><p>{full}</p></div></figure></div>')
+rv = "".join(rv_card(*r) for r in REVIEWS)
+home += sec(f'{eb("Testimonials")}<h2>Customer testimonials</h2><div class="rv-box" data-rv role="region" aria-roledescription="carousel" aria-label="Customer reviews">'
+            f'<button type="button" class="rv-arrow prev" aria-label="Previous review">\u2039</button><div class="rv-wrap"><div class="rv-track">{rv}</div></div><button type="button" class="rv-arrow next" aria-label="Next review">\u203a</button></div>' + btns([("Be a satisfied customer!", "/contact/")]), center=True)
 home += sec("<h2>Frequently asked questions</h2>" + faq(FAQ_HOME), "cream", center=True)
 home += quote_section()
 page("/", "home", "Snow Removal in Essex County, MA | New England Snow Removal",

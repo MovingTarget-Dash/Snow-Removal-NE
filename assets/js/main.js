@@ -63,3 +63,80 @@
     });
   });
 })();
+
+/* testimonials carousel: arrows, a new card every 3s in a loop, "More" opens the full review */
+(function () {
+  var box = document.querySelector('[data-rv]');
+  if (!box) return;
+  var wrap = box.querySelector('.rv-wrap'), track = box.querySelector('.rv-track');
+  var slides = [].slice.call(track.children), n = slides.length, K = 3;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* "More" buttons only where the text is actually cut */
+  function checkMore() {
+    box.querySelectorAll('.rv').forEach(function (f) {
+      var p = f.querySelector('.clamp'), m = f.querySelector('.more');
+      m.hidden = !(p.scrollHeight > p.clientHeight + 1);
+    });
+  }
+  var dlg = document.createElement('dialog');
+  dlg.className = 'rv-modal';
+  dlg.setAttribute('aria-label', 'Full review');
+  document.body.appendChild(dlg);
+  dlg.addEventListener('click', function (ev) { if (ev.target === dlg) dlg.close(); });
+  box.addEventListener('click', function (ev) {
+    var m = ev.target.closest('.more');
+    if (!m) return;
+    var f = m.closest('.rv'), av = f.querySelector('.av');
+    dlg.innerHTML = '<button type="button" class="x" aria-label="Close">\u00d7</button>'
+      + f.querySelector('.g').outerHTML
+      + '<div class="who"><div class="av" style="' + av.getAttribute('style') + '">' + av.textContent + '</div><div><b>'
+      + f.querySelector('b').textContent + '</b><div class="src">Google review</div></div></div>'
+      + '<div class="st" aria-label="5 stars">\u2605\u2605\u2605\u2605\u2605</div><div class="body">' + f.querySelector('.full').innerHTML + '</div>';
+    dlg.querySelector('.x').addEventListener('click', function () { dlg.close(); });
+    dlg.showModal();
+  });
+  checkMore();
+  window.addEventListener('resize', checkMore);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkMore);
+
+  if (reduce) {
+    [].forEach.call(box.querySelectorAll('.rv-arrow'), function (a) {
+      a.addEventListener('click', function () {
+        wrap.scrollBy({ left: (a.classList.contains('next') ? 1 : -1) * slides[0].offsetWidth });
+      });
+    });
+    return;
+  }
+
+  /* clones on both ends make the loop seamless */
+  slides.slice(-K).forEach(function (s) { var c = s.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.insertBefore(c, track.firstChild); });
+  slides.slice(0, K).forEach(function (s) { var c = s.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
+  box.classList.add('on');
+  checkMore();
+  var p = 0, busy = false, paused = false, timer;
+  function move(animate) {
+    track.style.transition = animate ? '' : 'none';
+    track.style.transform = 'translateX(-' + ((p + K) * slides[0].offsetWidth) + 'px)';
+  }
+  function step(d) {
+    if (busy) return;
+    busy = true; p += d; move(true);
+    setTimeout(function () {
+      busy = false;
+      if (p >= n) { p -= n; move(false); } else if (p < 0) { p += n; move(false); }
+    }, 950);
+  }
+  function restart() { clearInterval(timer); timer = setInterval(function () { if (!paused && !document.hidden) step(1); }, 3000); }
+  box.querySelector('.prev').addEventListener('click', function () { step(-1); restart(); });
+  box.querySelector('.next').addEventListener('click', function () { step(1); restart(); });
+  box.addEventListener('mouseenter', function () { paused = true; });
+  box.addEventListener('mouseleave', function () { paused = false; });
+  box.addEventListener('focusin', function () { paused = true; });
+  box.addEventListener('focusout', function () { paused = false; });
+  box.addEventListener('click', function (ev) { if (ev.target.closest('.more')) paused = true; });
+  dlg.addEventListener('close', function () { paused = false; });
+  window.addEventListener('resize', function () { move(false); });
+  move(false);
+  restart();
+})();
