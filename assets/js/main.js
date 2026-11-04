@@ -140,3 +140,55 @@
   move(false);
   restart();
 })();
+
+/* falling snow over the home hero (skipped for "reduce motion") */
+(function () {
+  var hero = document.querySelector('.hero:not(.sm)');
+  if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cv = document.createElement('canvas');
+  cv.className = 'snow';
+  cv.setAttribute('aria-hidden', 'true');
+  hero.appendChild(cv);
+  var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = 1, flakes = [], t = 0, raf = 0, visible = true;
+  function make(first) {
+    var r = 0.8 + Math.random() * Math.random() * 3.2;
+    return { x: Math.random() * W, y: first ? Math.random() * H : -r * 2, r: r,
+             vy: 18 + r * 14 + Math.random() * 10, ph: Math.random() * 6.28, sw: 8 + Math.random() * 18,
+             a: 0.45 + Math.min(r / 4, 0.5) };
+  }
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = hero.clientWidth; H = hero.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var want = Math.min(Math.round(W * H / 7000), 170);
+    while (flakes.length < want) flakes.push(make(true));
+    flakes.length = want;
+  }
+  var last = 0;
+  function frame(ts) {
+    raf = 0;
+    if (!visible || document.hidden) { last = 0; return; }
+    var dt = last ? Math.min((ts - last) / 1000, 0.05) : 0.016;
+    last = ts; t += dt;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < flakes.length; i++) {
+      var f = flakes[i];
+      f.y += f.vy * dt;
+      var x = f.x + Math.sin(t * 0.8 + f.ph) * f.sw;
+      if (f.y > H + f.r * 2) { flakes[i] = make(false); continue; }
+      ctx.globalAlpha = f.a;
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(x, f.y, f.r, 0, 6.2832); ctx.fill();
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  function run() { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(frame); }
+  size();
+  window.addEventListener('resize', size);
+  document.addEventListener('visibilitychange', run);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; run(); }).observe(hero);
+  }
+  run();
+})();
