@@ -211,7 +211,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=2">
 {ldh}
 </head>
 <body>
@@ -221,7 +221,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 </main>
 {footer()}
 {max_btn(path)}
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v=2" defer></script>
 </body>
 </html>
 '''
