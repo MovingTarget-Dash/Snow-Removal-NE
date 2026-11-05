@@ -164,7 +164,7 @@ def footer():
 <div class="grid c4">
 <div><div class="brandrow"><img src="/assets/img/logo-horizontal.webp" alt="New England Carpenters" width="420" height="136" loading="lazy">{SEAL}</div>
 <p>{ADDR}</p><p><a href="tel:{TEL}">{PHONE}</a></p><p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
-<p><a href="{FB}" rel="noopener" target="_blank">Facebook</a> · <a href="{IG}" rel="noopener" target="_blank">Instagram</a> · <a href="{WA}" rel="noopener" target="_blank">WhatsApp</a></p></div>
+<p class="soc"><a href="{FB}" rel="noopener" target="_blank"><img src="/assets/img/social-facebook.webp" alt="" width="28" height="28" loading="lazy">Facebook</a><a href="{IG}" rel="noopener" target="_blank"><img src="/assets/img/social-instagram.webp" alt="" width="28" height="28" loading="lazy">Instagram</a><a href="{WA}" rel="noopener" target="_blank"><img src="/assets/img/social-whatsapp.webp" alt="" width="28" height="28" loading="lazy">WhatsApp</a></p></div>
 <div><h2>Quick Links</h2><ul><li><a href="/">Home</a></li><li><a href="/commercial-snow-removal/">Commercial Snow Removal</a></li><li><a href="/residential-snow-removal/">Residential Snow Removal</a></li><li><a href="/service-areas/">Service Areas</a></li><li><a href="/about/">About</a></li><li><a href="/our-work/">Our Work</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul></div>
 <div><h2>Services</h2><ul><li>Parking Lot Snow Removal</li><li>Snow Plowing and Shoveling</li><li>Sidewalks and Entryways</li><li>Ice Control and Removal</li><li>Snow and Ice Management Plans</li></ul></div>
 <div><h2>Service Areas</h2><ul>{cities}</ul></div></div>
@@ -211,7 +211,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css?v=8">
+<link rel="stylesheet" href="/assets/css/style.css?v=9">
 {ldh}
 </head>
 <body>
@@ -221,7 +221,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 </main>
 {footer()}
 {max_btn(path)}
-<script src="/assets/js/main.js?v=8" defer></script>
+<script src="/assets/js/main.js?v=9" defer></script>
 </body>
 </html>
 '''
@@ -406,10 +406,10 @@ ct += sec("<h2>What happens next</h2>" + steps([("You send the details", "The ad
             ("You agree the price", "Per visit or for the whole season.")]) + pills(["Free estimate", "Fast reply"]))
 ct += sec('<div style="max-width:760px;margin:0 auto"><h2>Fill out the form and contact us</h2><p class="lead" style="margin-bottom:26px">It takes a minute. We reply fast.</p>' + quote_form("Request a free quote") + '</div>', "cream", sid="quote")
 ct += sec("<h2>If you prefer, choose your preferred contact method below.</h2>" +
-          f'<div class="grid c4"><a class="card center" href="{WA}" target="_blank" rel="noopener" style="text-decoration:none"><div class="ico" style="margin:0 auto">{svg("chat")}</div><h3>WhatsApp</h3><p>{PHONE}</p></a>'
+          f'<div class="grid c4"><a class="card center" href="tel:{TEL}" style="text-decoration:none"><div class="ico" style="margin:0 auto">{svg("phone")}</div><h3>Phone</h3><p>{PHONE}</p></a>'
           f'<a class="card center" href="{SMS}" style="text-decoration:none"><div class="ico" style="margin:0 auto">{svg("chat")}</div><h3>SMS</h3><p>{PHONE}</p></a>'
-          f'<a class="card center" href="tel:{TEL}" style="text-decoration:none"><div class="ico" style="margin:0 auto">{svg("phone")}</div><h3>Phone</h3><p>{PHONE}</p></a>'
-          f'<a class="card center" href="mailto:{EMAIL}" style="text-decoration:none"><div class="ico" style="margin:0 auto">{svg("mail")}</div><h3>Email</h3><p>{EMAIL}</p></a></div>'
+          f'<a class="card center" href="mailto:{EMAIL}" style="text-decoration:none"><div class="ico" style="margin:0 auto">{svg("mail")}</div><h3>Email</h3><p>{EMAIL}</p></a>'
+          f'<a class="card center" href="{WA}" target="_blank" rel="noopener" style="text-decoration:none"><div class="ico" style="margin:0 auto">{svg("chat")}</div><h3>WhatsApp</h3><p>{PHONE}</p></a></div>'
           f'<p class="lead center" style="font-size:14px">{ADDR} · <a href="{FB}" target="_blank" rel="noopener">Facebook</a> · <a href="{IG}" target="_blank" rel="noopener">Instagram</a></p>', center=True)
 ct += sec("<h2>Helpful to include</h2>" + pills(["The site address", "Which surfaces: lot, walkways, drive lanes", "How early it has to be open", "Per visit or seasonal"]), "cream")
 ct += sec(mapbox("Find us", "North Andover, Massachusetts 01845"))

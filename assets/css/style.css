@@ -270,3 +270,7 @@ details.faq p{padding:2px 4px 20px 34px;color:#555;margin:0}
 
 /* falling snow over the hero photo */
 .hero .snow{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+
+.ftr .soc{display:flex;flex-wrap:wrap;gap:12px 22px;margin-top:26px}
+.ftr .soc a{display:inline-flex;align-items:center;gap:8px}
+.ftr .soc img{width:28px;height:28px;display:block;flex:none}
