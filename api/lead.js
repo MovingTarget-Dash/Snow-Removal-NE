@@ -1,7 +1,7 @@
 // Vercel Serverless Function: recebe o formulário de orçamento e envia por e-mail (Resend).
 // Variáveis de ambiente (Vercel > Settings > Environment Variables):
 //   RESEND_API_KEY  chave da conta Resend (obrigatória)
-//   LEAD_TO         destinatário (padrão: deck@newenglandcarpenters.com)
+//   LEAD_TO         destinatário (padrão: snow.removal@newenglandcarpenters.com)
 //   LEAD_FROM       remetente com domínio verificado no Resend, ex.: "New England Snow Removal <leads@snowremoval-ne.com>"
 
 const MAX = { name: 120, email: 160, phone: 40, address: 200, type: 20, message: 3000 };
@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return res.status(500).json({ ok: false, error: 'not_configured' });
 
-  const to = process.env.LEAD_TO || 'deck@newenglandcarpenters.com';
+  const to = process.env.LEAD_TO || 'snow.removal@newenglandcarpenters.com';
   const from = process.env.LEAD_FROM || 'New England Snow Removal <onboarding@resend.dev>';
   const rows = [
     ['Name', lead.name], ['Email', lead.email], ['Phone', lead.phone],

@@ -12,7 +12,7 @@ IMGDIR = os.path.join(OUT, "assets", "img")
 SITE = "https://snowremoval-ne.com"
 NAME = "New England Snow Removal"
 PHONE = "978-809-6279"; TEL = "+19788096279"
-EMAIL = "deck@newenglandcarpenters.com"
+EMAIL = "snow.removal@newenglandcarpenters.com"
 ADDR = "North Andover, Massachusetts 01845, United States"
 WA = "https://wa.me/19788096279?text=I%20came%20across%20your%20website%20and%20need%20a%20quote%21"
 SMS = "sms:+19788096279?body=I%20came%20across%20your%20website%20and%20need%20a%20quote%21"
@@ -134,7 +134,7 @@ def quote_form(title="Fill out the form and contact us"):
 def quote_section(sid="quote"):
     left = (f'{eb("Free quote")}<h2>Get a free snow removal quote</h2>'
             '<p class="lead">Tell us the address and what sits on it. You get back a plan written for that site, a price per visit or for the season, and a number that is answered when it is actually snowing.</p>'
-            f'<div class="side">{ico("phone")}<div><b>WhatsApp · SMS · Phone</b><a href="tel:{TEL}">{PHONE}</a></div></div>'
+            f'<div class="side">{ico("phone")}<div><b>Phone · SMS · WhatsApp</b><a href="tel:{TEL}">{PHONE}</a></div></div>'
             f'<div class="side">{ico("mail")}<div><b>Email</b><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>')
     return sec(f'<div class="fgrid"><div>{left}</div>{quote_form()}</div>', "dark", sid=sid)
 
@@ -211,7 +211,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png"><link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/style.css?v=7">
+<link rel="stylesheet" href="/assets/css/style.css?v=8">
 {ldh}
 </head>
 <body>
@@ -221,7 +221,7 @@ def page(path, key, title, desc, body, schema=None, noindex=False, og_type="webs
 </main>
 {footer()}
 {max_btn(path)}
-<script src="/assets/js/main.js?v=7" defer></script>
+<script src="/assets/js/main.js?v=8" defer></script>
 </body>
 </html>
 '''

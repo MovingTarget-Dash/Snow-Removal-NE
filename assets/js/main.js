@@ -57,7 +57,7 @@
         window.location.href = '/thank-you/';
       }).catch(function () {
         msg.className = 'fmsg err';
-        msg.innerHTML = 'We could not send your request right now. Please text or call us at <a href="tel:+19788096279">978-809-6279</a> or email <a href="mailto:deck@newenglandcarpenters.com">deck@newenglandcarpenters.com</a>.';
+        msg.innerHTML = 'We could not send your request right now. Please text or call us at <a href="tel:+19788096279">978-809-6279</a> or email <a href="mailto:snow.removal@newenglandcarpenters.com">snow.removal@newenglandcarpenters.com</a>.';
         btn.disabled = false; btn.textContent = label;
       });
     });
